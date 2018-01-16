@@ -7,6 +7,20 @@ apply plugin: 'org.springframework.boot'
 apply plugin: "io.spring.dependency-management"
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'jacoco'
+
+
+jacoco {
+	toolVersion = "0.7.6.201602180812"
+}
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+	}
+}
+
+check.dependsOn jacocoTestReport
 
 group = 'com.ebsco.platform.training.tdd'
 sourceCompatibility = 1.8
