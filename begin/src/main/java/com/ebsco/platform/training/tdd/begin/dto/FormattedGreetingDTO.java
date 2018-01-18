@@ -1,4 +1,4 @@
-package com.ebsco.platform.training.tdd.begin.model;
+package com.ebsco.platform.training.tdd.begin.dto;
 
 public class FormattedGreetingDTO {
 	private String formattedGreeting;

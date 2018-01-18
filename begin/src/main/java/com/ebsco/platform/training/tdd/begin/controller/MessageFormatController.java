@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ebsco.platform.training.tdd.begin.model.FormattedGreetingDTO;
-import com.ebsco.platform.training.tdd.begin.model.GreetingDTO;
+import com.ebsco.platform.training.tdd.begin.dto.FormattedGreetingDTO;
+import com.ebsco.platform.training.tdd.begin.dto.GreetingDTO;
 import com.ebsco.platform.training.tdd.begin.service.MessageFormatService;
 import com.ebsco.platform.training.tdd.begin.service.impl.MessageFormatServiceImpl;
 
