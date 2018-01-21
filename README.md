@@ -13,3 +13,6 @@ All subprojects shall be built from the root folder. Avoid going into the subpro
 
 ```google-chrome-app begin/build/reports/jacoco/test/html/index.html```
 
+## Use cases for endpoint
+1. return a 404 when the user is not found
+2. 

@@ -1,4 +1,4 @@
-package com.ebsco.platform.training.tdd.begin;
+package com.ebsco.platform.training.tdd.begin.app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,12 +7,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
-import com.ebsco.platform.training.tdd.begin.model.User;
-import com.ebsco.platform.training.tdd.begin.repository.UserRepository;
+import com.ebsco.platform.training.tdd.begin.app.model.User;
+import com.ebsco.platform.training.tdd.begin.app.repository.UserRepository;
+import com.ebsco.platform.training.tdd.begin.config.UserRootConfig;
 
 @SpringBootApplication
+@Import({UserRootConfig.class})
 public class Application {
 	
 	private static final Logger log = LoggerFactory.getLogger(Application.class);

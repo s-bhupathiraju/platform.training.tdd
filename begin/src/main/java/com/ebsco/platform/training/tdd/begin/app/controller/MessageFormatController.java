@@ -1,4 +1,4 @@
-package com.ebsco.platform.training.tdd.begin.controller;
+package com.ebsco.platform.training.tdd.begin.app.controller;
 
 import java.net.MalformedURLException;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ebsco.platform.training.tdd.begin.dto.FormattedGreetingDTO;
-import com.ebsco.platform.training.tdd.begin.dto.GreetingDTO;
-import com.ebsco.platform.training.tdd.begin.service.MessageFormatService;
-import com.ebsco.platform.training.tdd.begin.service.impl.MessageFormatServiceImpl;
+import com.ebsco.platform.training.tdd.begin.app.dto.FormattedGreetingDTO;
+import com.ebsco.platform.training.tdd.begin.app.dto.GreetingDTO;
+import com.ebsco.platform.training.tdd.begin.app.service.MessageFormatService;
+import com.ebsco.platform.training.tdd.begin.app.service.impl.MessageFormatServiceImpl;
 
 @RestController
 public class MessageFormatController {

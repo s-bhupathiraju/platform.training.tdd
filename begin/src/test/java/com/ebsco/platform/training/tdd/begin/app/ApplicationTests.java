@@ -1,4 +1,4 @@
-package com.ebsco.platform.training.tdd.begin;
+package com.ebsco.platform.training.tdd.begin.app;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

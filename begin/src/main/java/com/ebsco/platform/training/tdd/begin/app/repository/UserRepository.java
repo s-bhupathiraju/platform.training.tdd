@@ -1,9 +1,10 @@
-package com.ebsco.platform.training.tdd.begin.repository;
+package com.ebsco.platform.training.tdd.begin.app.repository;
 
 import java.util.List;
-import com.ebsco.platform.training.tdd.begin.model.User;
 
 import org.springframework.data.repository.CrudRepository;
+
+import com.ebsco.platform.training.tdd.begin.app.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
     List<User> findByLastName(String lastName);

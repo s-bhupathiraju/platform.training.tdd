@@ -1,4 +1,4 @@
-package com.ebsco.platform.training.tdd.begin.model;
+package com.ebsco.platform.training.tdd.begin.app.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.ebsco.platform.training.tdd.begin.dto;
+package com.ebsco.platform.training.tdd.begin.app.dto;
 
 public class GreetingDTO {
     private Integer userid;
