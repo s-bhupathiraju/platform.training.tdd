@@ -9,6 +9,10 @@ All subprojects shall be built from the root folder. Avoid going into the subpro
 
 ```gradle clean begin:check```
 
+> Build and bootRun
+```gradle clean begin:build begin:bootRun```
+
+
 > Open the coverage report generated from Jacoco
 
 ```google-chrome-app begin/build/reports/jacoco/test/html/index.html```

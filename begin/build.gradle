@@ -41,7 +41,6 @@ repositories {
 				}
 }
 
-
 ext {
         springCloudVersion = 'Edgware.BUILD-SNAPSHOT'
 }
