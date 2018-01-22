@@ -21,6 +21,13 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	
+	public User(Long id, String firstName, String lastName) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	@Override
 	public String toString() {

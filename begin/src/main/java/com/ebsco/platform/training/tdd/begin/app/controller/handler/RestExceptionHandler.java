@@ -1,4 +1,4 @@
-package com.ebsco.platform.training.tdd.begin.app.exception.handler;
+package com.ebsco.platform.training.tdd.begin.app.controller.handler;
 
 import java.util.Calendar;
 
