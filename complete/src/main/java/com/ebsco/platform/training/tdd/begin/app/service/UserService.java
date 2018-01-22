@@ -1,0 +1,7 @@
+package com.ebsco.platform.training.tdd.begin.app.service;
+
+import com.ebsco.platform.training.tdd.begin.app.model.User;
+
+public interface UserService {
+	public User findOne(Long id);
+}
