@@ -1,6 +1,7 @@
 package com.ebsco.platform.training.tdd.begin.app.controller;
 
 import java.net.MalformedURLException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,6 @@ import com.ebsco.platform.training.tdd.begin.app.exception.UserNotFoundException
 import com.ebsco.platform.training.tdd.begin.app.model.User;
 import com.ebsco.platform.training.tdd.begin.app.service.MessageFormatService;
 import com.ebsco.platform.training.tdd.begin.app.service.UserService;
-import com.ebsco.platform.training.tdd.begin.app.service.exception.UserNotFoundServiceException;
 
 @RestController
 @RequestMapping("/api")
@@ -48,13 +48,15 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserResource> findOne(@PathVariable Long id) {
-		try {
-			User user = userService.findOne(id);
-			UserResource userResource = userResourceAsm.toResource(user);
-			return new ResponseEntity<UserResource>(userResource, HttpStatus.OK);
-		} catch (UserNotFoundServiceException exception) {
+
+		Optional<User> user = userService.findOne(id);
+
+		if (!user.isPresent()) {
 			throw new UserNotFoundException();
 		}
+
+		UserResource userResource = userResourceAsm.toResource(user.get());
+		return new ResponseEntity<UserResource>(userResource, HttpStatus.OK);
 	}
 
 }
