@@ -1,12 +1,14 @@
 package com.ebsco.platform.training.tdd.begin.app.service.impl;
 
+
+
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import com.ebsco.platform.training.tdd.begin.app.service.impl.MessageFormatServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MessageFormatServiceImplTests {
@@ -20,7 +22,8 @@ public class MessageFormatServiceImplTests {
 	}
 	
 	@Test
-	public void simpleTest() {
-		
+	public void shouldCheckWhetherMessageFormatServiceIsNotNull() {	
+		assertNotNull("Service not null",messageFormatServiceImpl);
 	}
+	 
 }
