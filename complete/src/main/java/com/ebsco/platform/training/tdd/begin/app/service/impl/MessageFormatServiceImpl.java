@@ -21,7 +21,13 @@ public class MessageFormatServiceImpl implements MessageFormatService {
 
 	@Override
 	public FormattedGreetingDTO formatGreetingMessage(GreetingDTO greeting) {
-		return null;
+		if(greeting.getUserid() >= 20000L) {
+			throw new IllegalArgumentException();
+		}
+		else {
+			User user = userRepository.findOne(greeting.getUserid());
+			return new FormattedGreetingDTO(greeting.getPrefix() +" "+ user.getFirstName());
+		}
 	}
 
 }

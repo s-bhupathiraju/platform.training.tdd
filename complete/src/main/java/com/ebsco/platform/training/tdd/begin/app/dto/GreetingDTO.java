@@ -1,7 +1,7 @@
 package com.ebsco.platform.training.tdd.begin.app.dto;
 
 public class GreetingDTO {
-    private Integer userid;
+    private Long userid;
     private String prefix;
     private String suffix;
     
@@ -9,29 +9,29 @@ public class GreetingDTO {
         super();
     }
     
-    public GreetingDTO(Integer userid) {
+    public GreetingDTO(Long userid) {
         super();
         this.userid = userid;
     }
     
-    public GreetingDTO(String prefix, Integer userid) {
+    public GreetingDTO(String prefix, Long userid) {
         super();
         this.prefix = prefix;
         this.userid = userid;
     }
     
-    public GreetingDTO(String prefix, Integer userid, String suffix) {
+    public GreetingDTO(Long userid, String prefix, String suffix) {
         super();
         this.prefix = prefix;
         this.userid = userid;
         this.suffix = suffix;
     }
 
-	public Integer getUserid() {
+	public Long getUserid() {
 		return userid;
 	}
 
-	public void setUserid(Integer userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 

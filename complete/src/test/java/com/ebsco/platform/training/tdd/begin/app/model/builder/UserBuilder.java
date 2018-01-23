@@ -11,6 +11,10 @@ public class UserBuilder {
 		super();
 	}
 	
+	public static UserBuilder builder() {
+		return new UserBuilder();
+	}
+	
 	public UserBuilder(Long id, String firstName, String lastName) {
 		super();
 		this.id = id;
