@@ -18,5 +18,9 @@ All subprojects shall be built from the root folder. Avoid going into the subpro
 ```google-chrome-app begin/build/reports/jacoco/test/html/index.html```
 
 ## Use cases for endpoint
-1. return a NotFoundException when the user is not found, send some details in ErrorDetail
-2. 
+As a consumer of this service,
+I want to receive
+- an error if the id that I pass do no match any of the Users in the database
+- a greeting with Hello appended to my first name "Hello Chris"
+- a greeting with "prefix" appended to my first name "prefix Chris" ex: Greetings Chris
+- a greeting with "prefix" and "suffix" appended appropriately ex: Greeing Chris, How are you doing?

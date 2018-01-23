@@ -10,6 +10,7 @@ import com.ebsco.platform.training.tdd.begin.app.dto.GreetingDTO;
 import com.ebsco.platform.training.tdd.begin.app.model.User;
 import com.ebsco.platform.training.tdd.begin.app.repository.UserRepository;
 import com.ebsco.platform.training.tdd.begin.app.service.MessageFormatService;
+import com.ebsco.platform.training.tdd.begin.app.service.components.TimeLoggingComponent;
 
 @Service
 public class MessageFormatServiceImpl implements MessageFormatService {
@@ -18,9 +19,13 @@ public class MessageFormatServiceImpl implements MessageFormatService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private TimeLoggingComponent timeLoggingComponent;
 
 	@Override
 	public FormattedGreetingDTO formatGreetingMessage(GreetingDTO greeting) {
+		timeLoggingComponent.logTime();
 		if(greeting.getUserid() >= 20000L) {
 			throw new IllegalArgumentException();
 		}

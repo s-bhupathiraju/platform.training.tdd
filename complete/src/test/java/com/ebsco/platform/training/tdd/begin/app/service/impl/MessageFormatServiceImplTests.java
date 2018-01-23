@@ -1,7 +1,5 @@
 package com.ebsco.platform.training.tdd.begin.app.service.impl;
 
-
-
 import static org.mockito.Matchers.anyLong;
 
 import org.hamcrest.MatcherAssert;
@@ -10,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -19,6 +18,7 @@ import com.ebsco.platform.training.tdd.begin.app.dto.GreetingDTO;
 import com.ebsco.platform.training.tdd.begin.app.dto.builder.GreetingDTOBuilder;
 import com.ebsco.platform.training.tdd.begin.app.model.builder.UserBuilder;
 import com.ebsco.platform.training.tdd.begin.app.repository.UserRepository;
+import com.ebsco.platform.training.tdd.begin.app.service.components.TimeLoggingComponent;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MessageFormatServiceImplTests {
@@ -29,9 +29,13 @@ public class MessageFormatServiceImplTests {
 	@Mock
 	UserRepository userRepository;
 	
+	@Mock
+	TimeLoggingComponent timeLoggingComponent;
+	
 	@Before
 	public void setup() {
 		Mockito.reset(userRepository);
+		Mockito.reset(timeLoggingComponent);
 	}
 	
 	@Test
@@ -51,14 +55,17 @@ public class MessageFormatServiceImplTests {
 	@Test
 	public void shouldReturnError_WhenUserIdIsInRange() {
 		// Given
-		MethodStubber.simpleUserRepositoryFindOneStubber(userRepository);
+		MethodStubber.simpleUserRepositoryFindOneStubber(userRepository, timeLoggingComponent);
 		
 		// When service is called, then ...
 		Assert.notNull(messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithUserId(1L)), "not null");	
 		
 		// Verify
-		Mockito.verify(userRepository, Mockito.times(1)).findOne(anyLong());
-		Mockito.verifyNoMoreInteractions(userRepository); //can pass more than one mock in the parameters
+		Mockito.verify(userRepository, Mockito.times(1)).findOne(Matchers.anyLong());
+		Mockito.verify(timeLoggingComponent, Mockito.times(1)).logTime();
+		Mockito.inOrder(timeLoggingComponent, userRepository);
+		//can pass more than one mock in the parameters
+		Mockito.verifyNoMoreInteractions(userRepository, timeLoggingComponent);
 	}
 	
 	/*
@@ -68,14 +75,18 @@ public class MessageFormatServiceImplTests {
 	@Test
 	public void shouldReturnConcatenatedGreet_WhenPrefixIsSent() {
 		// Given
-		MethodStubber.simpleUserRepositoryFindOneStubberWithFirstName(userRepository);
+		MethodStubber.simpleUserRepositoryFindOneStubberWithFirstName(userRepository, timeLoggingComponent);
 		
 		// When service is called, then ...
 		MatcherAssert.assertThat(messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithIdAndPrefix(1L, "Hello")).getFormattedGreeting(), IsEqual.equalTo("Hello Chris"));
 		
 		// Verify
-		Mockito.verify(userRepository, Mockito.times(1)).findOne(anyLong());
-		Mockito.verifyNoMoreInteractions(userRepository); //can pass more than one mock in the parameters
+		Mockito.verify(userRepository, Mockito.times(1)).findOne(anyLong()); // Make sure to user Matchers for all arguments explicitly..
+		Mockito.verify(timeLoggingComponent, Mockito.times(1)).logTime();
+		Mockito.inOrder(timeLoggingComponent, userRepository);
+		//can pass more than one mock in the parameters
+		Mockito.verifyNoMoreInteractions(userRepository, timeLoggingComponent);
+		
 	}
 
 	/* Verify methods in Mockito..
@@ -90,7 +101,7 @@ public class MessageFormatServiceImplTests {
 	 */
 	
 	public static class MethodStubber{
-		public static void simpleUserRepositoryFindOneStubber(UserRepository userRepository) {
+		public static void simpleUserRepositoryFindOneStubber(UserRepository userRepository, TimeLoggingComponent timeLoggingComponent) {
 			/*
 			 * Mockito is just a framework that uses PROXY Design pattern for mocking any calls to dependencies */
 
@@ -98,9 +109,10 @@ public class MessageFormatServiceImplTests {
 			 * A very similar approach to consolidate all stubs in an inner class would make things clean
 			 * */
 			Mockito.when(userRepository.findOne(1L)).thenReturn(UserBuilder.builder().id(1L).build());
+			Mockito.when(timeLoggingComponent.logTime()).thenReturn(1000000L);
 		}
 		
-		public static void simpleUserRepositoryFindOneStubberWithFirstName(UserRepository userRepository) {
+		public static void simpleUserRepositoryFindOneStubberWithFirstName(UserRepository userRepository,TimeLoggingComponent timeLoggingComponent) {
 			/*
 			 * Mockito is just a framework that uses PROXY Design pattern for mocking any calls to dependencies */
 
@@ -108,9 +120,9 @@ public class MessageFormatServiceImplTests {
 			 * A very similar approach to consolidate all stubs in an inner class would make things clean
 			 * */
 			Mockito.when(userRepository.findOne(1L)).thenReturn(UserBuilder.builder().id(1L).firstName("Chris").build());
+			Mockito.when(timeLoggingComponent.logTime()).thenReturn(1000000L);
 		}
-		
-		
+
 	}
 	
 	static class MockBuilder{
