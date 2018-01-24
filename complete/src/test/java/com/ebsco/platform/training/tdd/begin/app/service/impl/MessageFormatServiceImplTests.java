@@ -81,13 +81,10 @@ public class MessageFormatServiceImplTests {
 		MatcherAssert.assertThat(messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithIdAndPrefix(1L, "Hello")).getFormattedGreeting(), IsEqual.equalTo("Hello Chris"));
 		
 		// Verify
-		Mockito.verify(userRepository, Mockito.times(1)).findOne(anyLong()); // Make sure to user Matchers for all arguments explicitly..
-		Mockito.verify(timeLoggingComponent, Mockito.times(1)).logTime();
-		Mockito.inOrder(timeLoggingComponent, userRepository);
-		//can pass more than one mock in the parameters
-		Mockito.verifyNoMoreInteractions(userRepository, timeLoggingComponent);
+		Verfier.verifyInteractions_WhenPrefixIsSent(userRepository, timeLoggingComponent);
 		
 	}
+
 
 	/* Verify methods in Mockito..
 		// Redundant. Showing an example of another way of doing this		
@@ -100,6 +97,17 @@ public class MessageFormatServiceImplTests {
 		// -- never() // negitivity tests can use this for some mocks
 	 */
 	
+	public static class Verfier{
+		
+		public static void verifyInteractions_WhenPrefixIsSent(UserRepository userRepository, TimeLoggingComponent timeLoggingComponent) {
+			Mockito.verify(userRepository, Mockito.times(1)).findOne(anyLong()); // Make sure to user Matchers for all arguments explicitly..
+			Mockito.verify(timeLoggingComponent, Mockito.times(1)).logTime();
+			Mockito.inOrder(timeLoggingComponent, userRepository);
+			//can pass more than one mock in the parameters
+			Mockito.verifyNoMoreInteractions(userRepository, timeLoggingComponent);
+		}
+
+	}
 	public static class MethodStubber{
 		public static void simpleUserRepositoryFindOneStubber(UserRepository userRepository, TimeLoggingComponent timeLoggingComponent) {
 			/*
