@@ -43,62 +43,68 @@ public class MessageFormatServiceImplTests {
 		Assert.notNull(messageFormatServiceImpl, "Service not null");
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void shouldReturnError_WhenUserIdIsNotInRange() {
-		messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithUserId(20000L));	
-	}
 	
-	/*
-	 * Tip: using assertions inside test methods are called direct assertions.
-	 * Use indirect assertions by consolidating a list of asserts in a helper method
-	 * */
-	@Test
-	public void shouldReturnError_WhenUserIdIsInRange() {
-		// Given
-		MethodStubber.simpleUserRepositoryFindOneStubber(userRepository, timeLoggingComponent);
-		
-		// When service is called, then ...
-		Assert.notNull(messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithUserId(1L)), "not null");	
-		
-		// Verify
-		Mockito.verify(userRepository, Mockito.times(1)).findOne(Matchers.anyLong());
-		Mockito.verify(timeLoggingComponent, Mockito.times(1)).logTime();
-		Mockito.inOrder(timeLoggingComponent, userRepository);
-		//can pass more than one mock in the parameters
-		Mockito.verifyNoMoreInteractions(userRepository, timeLoggingComponent);
-	}
 	
-	/*
-	 * Tip: Use of Hamcrest Asserts are easily readable than JUnit Asserts.
-	 * Using Hamcrest library in this unit test to make assertions
-	 * */
-	@Test
-	public void shouldReturnConcatenatedGreet_WhenPrefixIsSent() {
-		// Given
-		MethodStubber.simpleUserRepositoryFindOneStubberWithFirstName(userRepository, timeLoggingComponent);
-		
-		// When service is called, then ...
-		MatcherAssert.assertThat(messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithIdAndPrefix(1L, "Hello")).getFormattedGreeting(), IsEqual.equalTo("Hello Chris"));
-		
-		// Verify
-		Mockito.verify(userRepository, Mockito.times(1)).findOne(anyLong()); // Make sure to user Matchers for all arguments explicitly..
-		Mockito.verify(timeLoggingComponent, Mockito.times(1)).logTime();
-		Mockito.inOrder(timeLoggingComponent, userRepository);
-		//can pass more than one mock in the parameters
-		Mockito.verifyNoMoreInteractions(userRepository, timeLoggingComponent);
-		
-	}
-
-	/* Verify methods in Mockito..
-		// Redundant. Showing an example of another way of doing this		
-		Mockito.verify(userRepository, Mockito.atLeastOnce()).findOne(anyLong());
-		// All Options for Verify
-		// -- times(n)
-		// -- atLeastOnce(n)
-		// -- atLeast(n)
-		// -- atMost(n)
-		// -- never() // negitivity tests can use this for some mocks
-	 */
+	
+	
+	
+//	
+//	@Test(expected=IllegalArgumentException.class)
+//	public void shouldReturnError_WhenUserIdIsNotInRange() {
+//		messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithUserId(20000L));	
+//	}
+//	
+//	/*
+//	 * Tip: using assertions inside test methods are called direct assertions.
+//	 * Use indirect assertions by consolidating a list of asserts in a helper method
+//	 * */
+//	@Test
+//	public void shouldReturnError_WhenUserIdIsInRange() {
+//		// Given
+//		MethodStubber.simpleUserRepositoryFindOneStubber(userRepository, timeLoggingComponent);
+//		
+//		// When service is called, then ...
+//		Assert.notNull(messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithUserId(1L)), "not null");	
+//		
+//		// Verify
+//		Mockito.verify(userRepository, Mockito.times(1)).findOne(Matchers.anyLong());
+//		Mockito.verify(timeLoggingComponent, Mockito.times(1)).logTime();
+//		Mockito.inOrder(timeLoggingComponent, userRepository);
+//		//can pass more than one mock in the parameters
+//		Mockito.verifyNoMoreInteractions(userRepository, timeLoggingComponent);
+//	}
+//	
+//	/*
+//	 * Tip: Use of Hamcrest Asserts are easily readable than JUnit Asserts.
+//	 * Using Hamcrest library in this unit test to make assertions
+//	 * */
+//	@Test
+//	public void shouldReturnConcatenatedGreet_WhenPrefixIsSent() {
+//		// Given
+//		MethodStubber.simpleUserRepositoryFindOneStubberWithFirstName(userRepository, timeLoggingComponent);
+//		
+//		// When service is called, then ...
+//		MatcherAssert.assertThat(messageFormatServiceImpl.formatGreetingMessage(MockBuilder.buildGreetingDTOWithIdAndPrefix(1L, "Hello")).getFormattedGreeting(), IsEqual.equalTo("Hello Chris"));
+//		
+//		// Verify
+//		Mockito.verify(userRepository, Mockito.times(1)).findOne(anyLong()); // Make sure to user Matchers for all arguments explicitly..
+//		Mockito.verify(timeLoggingComponent, Mockito.times(1)).logTime();
+//		Mockito.inOrder(timeLoggingComponent, userRepository);
+//		//can pass more than one mock in the parameters
+//		Mockito.verifyNoMoreInteractions(userRepository, timeLoggingComponent);
+//		
+//	}
+//
+//	/* Verify methods in Mockito..
+//		// Redundant. Showing an example of another way of doing this		
+//		Mockito.verify(userRepository, Mockito.atLeastOnce()).findOne(anyLong());
+//		// All Options for Verify
+//		// -- times(n)
+//		// -- atLeastOnce(n)
+//		// -- atLeast(n)
+//		// -- atMost(n)
+//		// -- never() // negitivity tests can use this for some mocks
+//	 */
 	
 	public static class MethodStubber{
 		public static void simpleUserRepositoryFindOneStubber(UserRepository userRepository, TimeLoggingComponent timeLoggingComponent) {
